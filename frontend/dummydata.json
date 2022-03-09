@@ -1,0 +1,21 @@
+{
+    "name": "Long",
+    "age": 20,
+    "eyes": "Blue",
+    "height": 180,
+    "weight": 180,
+}
+{
+    "name": "bob",
+    "age": 30,
+    "eyes": "Brown",
+    "height": 120,
+    "weight": 120,
+}
+{
+    "name": "Joe",
+    "age": 40,
+    "eyes": "Green",
+    "height": 150,
+    "weight": 150,
+}

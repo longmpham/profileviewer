@@ -16,9 +16,6 @@ const ProfileSchema = new mongoose.Schema({
   weight: {
     type: Number,
   },
-  birthday: {
-    type: Date,
-  },
 });
 
 const ProfileModel = mongoose.model("Profile", ProfileSchema);
