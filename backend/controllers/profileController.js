@@ -9,16 +9,16 @@ const getProfile = asyncHandler(async (req, res, next) => {
     res.status(200).send(profiles);
   } catch (error) {
     res.status(500);
-    return next(new Error(error));
+    throw new Error("Something bad happened...");
   }
 })
 
 // const getOneProfile =
 
-const postProfile = asyncHandler(async (req, res, next) => {
+const postProfile = asyncHandler(async (req, res) => {
   // handle empty case...
   if (Object.keys(req.body).length === 0) {
-    return next(new Error("your post was empty"));
+    throw new Error("your post was empty");
   }
 
   try {
@@ -28,7 +28,8 @@ const postProfile = asyncHandler(async (req, res, next) => {
     console.log("new profile:" + profile);
     res.status(200).send(profile);
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500);
+    throw new Error("Something bad happened...");
   }
 });
 
@@ -48,7 +49,8 @@ const updateProfile = asyncHandler(async (req, res) => {
     const updatedProfile = await foundProfile.save();
     res.status(200).json(updatedProfile)
   } catch (error) {
-    res.send(error);
+    res.status(500);
+    throw new Error("Something bad happened...");
   }
 })
 
@@ -69,7 +71,8 @@ const deleteProfile = asyncHandler (async (req, res) => {
     // const foundProfile = await ProfileModel.findByIdAndDelete(id)
     res.status(200).json({id: id})
   } catch (error) {
-    res.send(error)
+    res.status(500);
+    throw new Error("Something bad happened...");
   }
   // res.status(200).json({ message: `deleteProfile: ${req.params.id}` });
 });
