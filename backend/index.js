@@ -4,14 +4,17 @@ const connectDB = require("./config/db.js");
 const { errorHandler } = require("./middleware/errorMiddleware.js")
 const dotenv = require("dotenv").config();
 
+// connect to your DB
+connectDB();
+
+// middleware
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use("*", cors());
 
 
-// connect to your DB
-connectDB();
+
 
 const port = process.env.PORT || 8001
 app.use('/api/profiles', require("./routes/profileRoutes"))

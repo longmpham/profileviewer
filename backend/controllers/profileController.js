@@ -4,7 +4,7 @@ const ProfileModel = require("../models/profile");
 
 const getProfile = asyncHandler(async (req, res, next) => {
   // res.status(200).json({ message: "getProfile"})
-  const profiles = await ProfileModel.find({});
+  const profiles = await ProfileModel.find();
   try {
     res.status(200).send(profiles);
   } catch (error) {
@@ -33,22 +33,44 @@ const postProfile = asyncHandler(async (req, res, next) => {
 });
 
 const updateProfile = asyncHandler(async (req, res) => {
-  // handle if not found? or do it all in one line!
-  try {
-    const id = req.params.id;
+  
+  const id = req.params.id;
+  const profile = await ProfileModel.findById(id)
 
-    const foundProfile = await ProfileModel.findByIdAndUpdate(id, {
-      ...req.body,
-    });
-    const saveProfile = await foundProfile.save();
-    res.status(200).send({ foundProfile });
+  // check if it exists
+  if (!profile) {
+    res.status(400)
+    throw new Error("No profile was found")
+  }
+  
+  try {
+    const foundProfile = await ProfileModel.findByIdAndUpdate(id, req.body, {new: true});
+    const updatedProfile = await foundProfile.save();
+    res.status(200).json(updatedProfile)
   } catch (error) {
     res.send(error);
   }
 })
 
 const deleteProfile = asyncHandler (async (req, res) => {
-  res.status(200).json({ message: `deleteProfile: ${req.params.id}` });
+
+  const id = req.params.id
+  const profile = await ProfileModel.findById(id)
+  
+  // check for existing id
+  if (!profile) {
+    res.status(400)
+    throw new Error("No profile was found")
+  }
+
+  try {
+    await profile.remove()
+    // const foundProfile = await ProfileModel.findByIdAndDelete(id)
+    res.status(200).json({id: id})
+  } catch (error) {
+    res.send(error)
+  }
+  // res.status(200).json({ message: `deleteProfile: ${req.params.id}` });
 });
 
 module.exports = {
