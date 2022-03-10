@@ -42,7 +42,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error("No profile was found")
   }
-  
+
   try {
     const foundProfile = await ProfileModel.findByIdAndUpdate(id, req.body, {new: true});
     const updatedProfile = await foundProfile.save();
@@ -54,6 +54,7 @@ const updateProfile = asyncHandler(async (req, res) => {
 
 const deleteProfile = asyncHandler (async (req, res) => {
 
+  ProfileModel.findOneAndDelete();
   const id = req.params.id
   const profile = await ProfileModel.findById(id)
   

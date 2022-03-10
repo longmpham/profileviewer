@@ -5,6 +5,7 @@ const { errorHandler } = require("./middleware/errorMiddleware.js")
 const dotenv = require("dotenv").config();
 
 // connect to your DB
+const port = process.env.PORT || 8001
 connectDB();
 
 // middleware
@@ -13,12 +14,11 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use("*", cors());
 
-
-
-
-const port = process.env.PORT || 8001
+// routes
 app.use('/api/profiles', require("./routes/profileRoutes"))
+app.use('/api/users', require("./routes/userRoutes"))
 
+// error handler
 app.use(errorHandler)
 
 
