@@ -37,6 +37,7 @@ const registerUser = asyncHandler(async (req, res) => {
         _id: newUser._id,
         username: newUser.username,
         email: newUser.email,
+        token: generateToken(newUser._id)
       });
     } else {
       res.status(400);
@@ -48,7 +49,41 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 const loginUser = asyncHandler(async (req, res) => {
-  res.json({ message: "login user" });
+
+  const { username, email, password } = req.body
+
+  // check if email password is empty
+  if (!email || !password) {
+    res.status(400)
+    throw new Error("email or password missing")
+  }
+
+  try {
+    // check if email exists in db
+    const foundUser = await UserModel.findOne({email})
+    if (!foundUser) {
+      res.status(400)
+      throw new Error("no email found")
+    } else {
+      // check password match
+      const passwordMatch = await bcrypt.compare(password, foundUser.password)
+      if(foundUser && passwordMatch) {
+        // we have a match! now log in
+        res.status(200).send({
+          _id: foundUser._id,
+          username: foundUser.username,
+          email: foundUser.email,
+          token: generateToken(foundUser._id)
+        })
+      } else {
+        res.status(400)
+        throw new Error("Password doesn't match")
+      }
+    }
+  } catch (error) {
+    res.status(500);
+    throw new Error("Something went wrong..." + error);
+  }
 });
 const getMe = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
@@ -66,6 +101,7 @@ const getMe = asyncHandler(async (req, res) => {
         _id: foundUser._id,
         username: foundUser.username,
         email: foundUser.email,
+        token: generateToken(newUser._id)
       });
 
     } else {
@@ -78,6 +114,12 @@ const getMe = asyncHandler(async (req, res) => {
     throw new Error("Something went wrong..." + error);
   }
 });
+
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
+  })
+}
 
 module.exports = {
   registerUser,
