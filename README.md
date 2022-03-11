@@ -41,11 +41,11 @@
 ```git add .```
 ```git commit -m "message"```
 (initial only) ```git remote add <url>```
-```git push -u <remote name> <branch name>```                 example: git push -u origin master
+```git push -u <remote name> <branch name>```                 example: ```git push -u origin master```
 
 #### New branch? 
 If you forgot to create a new branch before editing new code in, use this statement to put all your changes and create a new branch with those changes in it
-```git switch -c <name of new branch>```                      example: git switch -c createuserlogin
+```git switch -c <name of new branch>```                      example: ```git switch -c createuserlogin```
 
 Else use this command and then do your new edits in.
 ```git checkout -b <name of new branch>```                    this creates a new branch and switches to it.
