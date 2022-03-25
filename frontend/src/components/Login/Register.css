@@ -1,0 +1,38 @@
+.register-container {
+  /* margin: 5% 10%; */
+  padding: 5% 10%;
+  /* display: flex; */
+  background-color:grey;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color:antiquewhite;
+  padding: 20px;
+  /* backdrop-filter: blur(5px); */
+  box-shadow: 0 0 20px black
+}
+
+.register-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.register-form form input {
+  flex: 1 1 100%;
+}
+
+.register-form form button {
+  flex: 1 1 100%;
+  color: white;
+  background-color: black;
+  border: none;
+}

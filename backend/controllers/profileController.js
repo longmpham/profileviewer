@@ -35,7 +35,7 @@ const postProfile = asyncHandler(async (req, res) => {
     res.status(200).send(profile);
   } catch (error) {
     res.status(500);
-    throw new Error("Something bad happened...");
+    throw new Error("Something bad happened... " + error);
   }
 });
 
@@ -70,7 +70,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     res.status(200).json(updatedProfile)
   } catch (error) {
     res.status(500);
-    throw new Error("Something bad happened..." + error);
+    throw new Error("Something bad happened... " + error);
   }
 })
 
@@ -84,10 +84,6 @@ const deleteProfile = asyncHandler (async (req, res) => {
     res.status(400)
     throw new Error("No profile was found")
   }
-
-  // question: if user A tries to delete user B contents, it results in 2 errors
-  // the first error is caught and 'User not authorized to update' is called. but then express 
-  // catches another error? why? 
 
   try {
   // handle with token now. find the user based on token so that other users cant update
@@ -111,7 +107,7 @@ const deleteProfile = asyncHandler (async (req, res) => {
   res.status(200).json({id: id})
   } catch (error) {
     res.status(401)
-    throw new Error("Something bad happened..." + error);
+    throw new Error("Something bad happened... " + error);
   }
   // res.status(200).json({ message: `deleteProfile: ${req.params.id}` });
 });

@@ -44,7 +44,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }
   } catch (error) {
     res.status(500);
-    throw new Error("Something went wrong..." + error);
+    throw new Error("Something went wrong... " + error);
   }
 });
 const loginUser = asyncHandler(async (req, res) => {
@@ -80,7 +80,7 @@ const loginUser = asyncHandler(async (req, res) => {
     }
   } catch (error) {
     res.status(500);
-    throw new Error("Something went wrong..." + error);
+    throw new Error("Something went wrong... " + error);
   }
 });
 
@@ -97,6 +97,7 @@ const getMe = asyncHandler(async (req, res) => {
 });
 
 const generateToken = (id) => {
+  console.log(`JWT for user: ${id}`)
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });

@@ -1,18 +1,26 @@
 import React from "react"
 
-import "./Login.css"
+import "./Register.css"
 
-const Login = () => {
+const Register = () => {
 
   const [formData, setFormData] = React.useState({
+    username: '',
     email: '',
     password: '',
+    confirmPassword: '',
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formData)
-    console.log("Success: Submitted Form")
+
+    if(formData.password !== formData.confirmPassword) {
+      alert("Password's don't match!")
+    }
+    else{
+      console.log(formData)
+      console.log("Success: Submitted Form")
+    }
   }
 
   const handleChange = (event) => {
@@ -24,14 +32,18 @@ const Login = () => {
     })
   }
 
+  const confirmPasswordStyle = (formData.password === formData.confirmPassword) ? { borderColor: "green" } : { borderColor: "red" }
+
   return (
     <div className="register-container">
       <div className="register-form">
-        <h1>Login</h1>
-        <p>Login and unlock your full potential</p>
+        <h1>Register</h1>
+        <p>Please Create An Account</p>
         <form onSubmit={handleSubmit}>
+          <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange}></input>
           <input type="email" name="email" placeholder="email@email.com" value={formData.email} onChange={handleChange}></input>
           <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange}></input>
+          <input type="password" name="confirmPassword" placeholder="Confirm Your Password" value={formData.confirmPassword} onChange={handleChange} style={confirmPasswordStyle}></input>
           <button type="submit">Submit</button>
         </form>
       </div>
@@ -39,4 +51,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register
