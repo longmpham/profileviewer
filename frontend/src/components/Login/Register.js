@@ -10,6 +10,7 @@ const Register = () => {
     password: '',
     confirmPassword: '',
   });
+  const [passwordsConfirmed, setPasswordsConfirmed] = React.useState(false)
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,7 +33,20 @@ const Register = () => {
     })
   }
 
-  const confirmPasswordStyle = (formData.password === formData.confirmPassword) ? { borderColor: "green" } : { borderColor: "red" }
+  React.useEffect( () => {
+    const checkPasswords = async () => {
+      if(formData.password === formData.confirmPassword) {
+        setPasswordsConfirmed(true)
+        console.log("passwords match!")
+      } else {
+        setPasswordsConfirmed(false)
+        console.log("passwords don't match!!!")
+      }
+    }
+    checkPasswords()
+  },[formData.confirmPassword, formData.password])
+
+  const confirmPasswordStyle = passwordsConfirmed ? { borderColor: "green" } : { borderColor: "red" }
 
   return (
     <div className="register-container">
