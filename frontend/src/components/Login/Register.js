@@ -15,12 +15,12 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if(formData.password !== formData.confirmPassword) {
-      alert("Password's don't match!")
-    }
-    else{
+    if(passwordsConfirmed) {
       console.log(formData)
       console.log("Success: Submitted Form")
+    }
+    else{
+      alert("Password's don't match!")
     }
   }
 
