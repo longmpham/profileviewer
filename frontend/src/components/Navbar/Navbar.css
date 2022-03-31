@@ -31,6 +31,10 @@
   /* height: 100%; */
 }
 
+.navbar-list-item svg {
+  /* text-align: center; */
+}
+
 .navbar-list-item a {
   /* background-color: blue; */
   padding: 10px;

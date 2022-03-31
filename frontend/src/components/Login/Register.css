@@ -28,6 +28,7 @@
 
 .register-form form input {
   flex: 1 1 100%;
+  /* border-radius: 9px */
 }
 
 .register-form form button {
@@ -35,4 +36,10 @@
   color: white;
   background-color: black;
   border: none;
+  border-radius: 9px;
+  padding: 5px;
+}
+
+.register-form form button:hover {
+  background-color: rgba(0,0,0,0.7)
 }

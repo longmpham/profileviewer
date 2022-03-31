@@ -1,0 +1,29 @@
+.notfound-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5% 10%;
+}
+
+.notfound-title {
+  text-align: center;
+}
+
+.notfound-title button {
+  padding: 10px 0;
+  background-color: black;
+  /* margin: 0; */
+  border: none;
+  border-radius: 9px;
+  width: 100%;
+}
+
+.notfound-title button a {
+  color: white;
+  text-decoration: none;
+  /* width: 100%; */
+  /* background-color: blue; */
+  padding: 10px;
+  /* border: none; */
+}

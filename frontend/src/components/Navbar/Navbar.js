@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa" 
+import { FaSignInAlt, FaClipboard, FaUser } from "react-icons/fa" 
 
 import "./Navbar.css"
 
@@ -14,7 +14,7 @@ const Navbar = () => {
         <ul className="navbar-list">
           <li className="navbar-list-item"><Link to="/"><FaUser />Home</Link></li>
           <li className="navbar-list-item"><Link to="/login"><FaSignInAlt />Login</Link></li>
-          <li className="navbar-list-item"><Link to="/register"><FaSignInAlt />Register</Link></li>
+          <li className="navbar-list-item"><Link to="/register"><FaClipboard />Register</Link></li>
         </ul>
       </nav>
     </>
